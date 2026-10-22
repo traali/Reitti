@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="fi">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#0f172a" />
+<meta name="description" content="Reitti: tietyöt, keli ja kunnossapito reittisi varrella kuvakaappauksesta." />
+<title>Reitti – mitä matkan varrella on</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='15' fill='%230ea5e9'/%3E%3Cpath d='M9 24 C 12 14, 20 18, 23 8' stroke='white' stroke-width='3' fill='none' stroke-linecap='round'/%3E%3C/svg%3E" />
+</head>
+<body>
+<header><h1>Reitti</h1><p>Tietyöt, keli ja kunnossapito reittisi varrella</p></header>
+<main id="app">
+  <section class="card" id="input-card">
+    <h2>1. Lisää reitti</h2>
+    <label class="big-btn" for="file">📷 Valitse reitin kuvakaappaus</label>
+    <input id="file" type="file" accept="image/*" hidden />
+    <p class="hint">Google Maps, Apple Kartat tai Waze. Kuva luetaan puhelimessasi, sitä ei lähetetä minnekään. Ensimmäisellä kerralla ladataan tekstintunnistus (noin 15 Mt).</p>
+    <div id="ocr-progress" class="progress" hidden><div></div><span></span></div>
+    <details id="alt">
+      <summary>Tai liitä karttalinkki / kirjoita osoitteet</summary>
+      <label>Jaettu Google- tai Apple Maps -linkki<input id="link" type="url" inputmode="url" placeholder="https://maps.app.goo.gl/…" /></label>
+      <button id="link-btn" class="btn">Lue linkki</button>
+    </details>
+  </section>
+
+  <section class="card" id="confirm-card" hidden>
+    <h2>2. Tarkista reitti</h2>
+    <div id="read-summary"></div>
+    <label>Lähtö<input id="origin" autocomplete="off" placeholder="esim. Kamppi, Helsinki" /></label>
+    <button id="locate" class="btn secondary">📍 Käytä nykyistä sijaintiani</button>
+    <label>Kautta (valinnainen, erota puolipisteellä)<input id="via" autocomplete="off" placeholder="esim. Porvoo; Hamina" /></label>
+    <label>Määränpää<input id="destination" autocomplete="off" placeholder="esim. Tampere" /></label>
+    <button id="go" class="big-btn">Hae reitti ja tiedot</button>
+    <p id="confirm-msg" class="msg" role="status"></p>
+  </section>
+
+  <section class="card" id="result-card" hidden>
+    <h2>3. Reitin varrella</h2>
+    <div id="route-summary"></div>
+    <div id="map" role="img" aria-label="Reittikartta"></div>
+    <ul id="sources" class="sources"></ul>
+    <ol id="alerts" class="alerts"></ol>
+    <label class="toggle"><input type="checkbox" id="notify" /> Ilmoita uusista tiedoista, kun sivu on auki (tarkistus 5 min välein)</label>
+    <p class="hint">Ilmoitukset toimivat vain tämän sivun ollessa auki selaimessa. Etäilmoituksia (push) ei ole.</p>
+  </section>
+</main>
+<footer>
+  <p>Lähteet: Fintraffic / digitraffic.fi, Helsingin kaupunki, Espoon kaupunki, Ilmatieteen laitos (kaikki CC BY 4.0). Reititys OSRM, kartta ja paikkahaku © OpenStreetMapin tekijät (Photon, Nominatim).</p>
+  <p>Tiedot voivat olla puutteellisia. Aja aina olosuhteiden mukaan.</p>
+</footer>
+<script type="module" src="/src/main.ts"></script>
+</body>
+</html>
