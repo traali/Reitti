@@ -32,7 +32,7 @@ async function ocrWorker(onP: (p: number, s: string) => void) {
   if (!workerP) workerP = (async () => {
     const { createWorker } = await import("tesseract.js");
     const w = await createWorker(["fin", "eng"], 1, { logger: (m: any) => onP(m.progress ?? 0, m.status === "recognizing text" ? "Luetaan tekstiä…" : "Ladataan tekstintunnistusta…") });
-    await w.setParameters({ tessedit_pageseg_mode: "11" as any });
+    await w.setParameters({ tessedit_pageseg_mode: "11" as any, debug_file: "/dev/null" } as any);
     return w;
   })().catch((e) => { workerP = null; throw e; });
   return workerP;
